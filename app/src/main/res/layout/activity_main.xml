@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FFFFCC"
+    android:gravity="top|center_horizontal">
+
+    <!-- Logo ImageView -->
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginBottom="24dp"
+        android:contentDescription="Logo"
+        android:src="@drawable/logo" />
+
+    <!-- App Title -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome to Admin App"
+        android:textColor="#2C3E50"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Subtitle -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Manage classes, teachers, and customers effectively"
+        android:textColor="#5C5E61"
+        android:textSize="14sp"
+        android:layout_marginBottom="24dp"
+        android:gravity="center" />
+
+    <!-- Button for viewing classes -->
+    <Button
+        android:id="@+id/buttonViewClass"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="View Classes"
+        android:backgroundTint="#A0522D"
+        android:textColor="#FFFFFF"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_button" />
+
+    <!-- Button for viewing teachers -->
+    <Button
+        android:id="@+id/buttonViewTeacher"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="View Teachers"
+        android:backgroundTint="#A0522D"
+        android:textColor="#FFFFFF"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_button" />
+
+    <!-- Button for viewing customers -->
+    <Button
+        android:id="@+id/buttonViewCustomer"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="View Customers"
+        android:backgroundTint="#A0522D"
+        android:textColor="#FFFFFF"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:background="@drawable/rounded_button" />
+</LinearLayout>
