@@ -34,6 +34,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_CLASS_TYPE = "class_type";
     private static final String COLUMN_TEACHER_NAME = "teacher_name";
     private static final String COLUMN_DESCRIPTION = "description";
+    public static final String TABLE_CUSTOMERS = "customers";
+
 
     private final DatabaseReference firebaseDatabaseRef;
     private SQLiteDatabase database;
@@ -142,7 +144,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void syncWithFirebase() {
-        // Đồng bộ giáo viên
+        // Sync teachers
+        Log.d("DatabaseHelper", "Syncing teachers from Firebase...");
         firebaseDatabaseRef.child("teachers").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -161,6 +164,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         }
                     }
                     db.setTransactionSuccessful();
+                    Log.d("DatabaseHelper", "Teachers data synced successfully.");
+                } catch (Exception e) {
+                    Log.e("DatabaseHelper", "Error syncing teachers: " + e.getMessage());
                 } finally {
                     db.endTransaction();
                 }
@@ -168,11 +174,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             @Override
             public void onCancelled(DatabaseError error) {
-                // Xử lý lỗi
+                Log.e("DatabaseHelper", "Failed to sync teachers: " + error.getMessage());
             }
         });
 
-        // Đồng bộ lớp học
+        // Sync classes
+        Log.d("DatabaseHelper", "Syncing classes from Firebase...");
         firebaseDatabaseRef.child("classes").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -196,6 +203,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         }
                     }
                     db.setTransactionSuccessful();
+                    Log.d("DatabaseHelper", "Classes data synced successfully.");
+                } catch (Exception e) {
+                    Log.e("DatabaseHelper", "Error syncing classes: " + e.getMessage());
                 } finally {
                     db.endTransaction();
                 }
@@ -203,11 +213,44 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             @Override
             public void onCancelled(DatabaseError error) {
-                // Xử lý lỗi
+                Log.e("DatabaseHelper", "Failed to sync classes: " + error.getMessage());
             }
         });
     }
-
+//    //Sync Customer
+//    public void syncCustomersWithFirebase() {
+//        DatabaseReference customersRef = FirebaseDatabase.getInstance().getReference("customers");
+//
+//        customersRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                SQLiteDatabase db = openDatabase();
+//                db.beginTransaction();
+//
+//                try {
+//                    db.delete(TABLE_CUSTOMERS, null, null);
+//
+//                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                        String email = snapshot.getKey().replace("_com", ".com");
+//                        ContentValues values = new ContentValues();
+//                        values.put(COLUMN_EMAIL, email);
+//                        db.insert(TABLE_CUSTOMERS, null, values);
+//                    }
+//                    db.setTransactionSuccessful();
+//                    Log.d("DatabaseHelper", "Customers data synced successfully.");
+//                } catch (Exception e) {
+//                    Log.e("DatabaseHelper", "Error syncing customers: " + e.getMessage());
+//                } finally {
+//                    db.endTransaction();
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError error) {
+//                Log.e("DatabaseHelper", "Failed to sync customers: " + error.getMessage());
+//            }
+//        });
+//    }
     public void printDatabaseContents() {
         SQLiteDatabase db = openDatabase();
         Cursor cursor = db.query(TABLE_CLASSES, null, null, null, null, null, null);

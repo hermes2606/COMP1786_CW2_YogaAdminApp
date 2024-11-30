@@ -93,13 +93,19 @@ public class AddClassActivity extends AppCompatActivity {
             if (classId != null) {
                 YogaClass newClass = new YogaClass(classId, date, time, capacity, duration, price, classType, selectedTeacher, description);
                 firebaseDatabaseRef.child(classId).setValue(newClass)
-                        .addOnSuccessListener(aVoid -> Toast.makeText(AddClassActivity.this, "Class added to Firebase successfully!", Toast.LENGTH_SHORT).show())
+                        .addOnSuccessListener(aVoid -> {
+                            Toast.makeText(AddClassActivity.this, "Class added to Firebase successfully!", Toast.LENGTH_SHORT).show();
+                            // Call the sync method after adding to Firebase
+                            DatabaseHelper databaseHelper = new DatabaseHelper(this);
+                            databaseHelper.syncWithFirebase();
+                        })
                         .addOnFailureListener(e -> Toast.makeText(AddClassActivity.this, "Failed to add class to Firebase: " + e.getMessage(), Toast.LENGTH_SHORT).show());
             }
 
+            // Notify that the class was added and finish the activity
             Toast.makeText(AddClassActivity.this, "Class added successfully!", Toast.LENGTH_SHORT).show();
-            setResult(RESULT_OK); // Notify that the class was added
-            finish(); // Return to the previous activity
+            setResult(RESULT_OK);
+            finish();
         }
     }
 

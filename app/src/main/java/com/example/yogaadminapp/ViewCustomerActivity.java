@@ -35,6 +35,8 @@ public class ViewCustomerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_customer);
+//        DatabaseHelper databaseHelper = new DatabaseHelper(this);
+//        databaseHelper.syncCustomersWithFirebase();
 
         listViewCustomers = findViewById(R.id.listViewCustomers);
         autoCompleteTextViewSearchEmail = findViewById(R.id.autoCompleteTextViewSearchEmail);
