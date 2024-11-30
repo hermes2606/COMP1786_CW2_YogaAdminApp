@@ -217,40 +217,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             }
         });
     }
-//    //Sync Customer
-//    public void syncCustomersWithFirebase() {
-//        DatabaseReference customersRef = FirebaseDatabase.getInstance().getReference("customers");
-//
-//        customersRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                SQLiteDatabase db = openDatabase();
-//                db.beginTransaction();
-//
-//                try {
-//                    db.delete(TABLE_CUSTOMERS, null, null);
-//
-//                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                        String email = snapshot.getKey().replace("_com", ".com");
-//                        ContentValues values = new ContentValues();
-//                        values.put(COLUMN_EMAIL, email);
-//                        db.insert(TABLE_CUSTOMERS, null, values);
-//                    }
-//                    db.setTransactionSuccessful();
-//                    Log.d("DatabaseHelper", "Customers data synced successfully.");
-//                } catch (Exception e) {
-//                    Log.e("DatabaseHelper", "Error syncing customers: " + e.getMessage());
-//                } finally {
-//                    db.endTransaction();
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError error) {
-//                Log.e("DatabaseHelper", "Failed to sync customers: " + error.getMessage());
-//            }
-//        });
-//    }
+
     public void printDatabaseContents() {
         SQLiteDatabase db = openDatabase();
         Cursor cursor = db.query(TABLE_CLASSES, null, null, null, null, null, null);

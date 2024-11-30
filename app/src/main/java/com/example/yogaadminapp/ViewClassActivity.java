@@ -182,7 +182,7 @@ public class ViewClassActivity extends AppCompatActivity {
             }
         });
     }
-
+    // search class by teacher name
     private void filterClassesByTeacherName(String teacherName) {
         if (teacherName.isEmpty()) {
             // Nếu không nhập tên giáo viên, hiển thị tất cả các lớp
@@ -201,7 +201,7 @@ public class ViewClassActivity extends AppCompatActivity {
         // Cập nhật danh sách hiển thị
         updateListView(filteredClasses, "No classes found for the specified teacher.");
     }
-
+    // search class by type
     private void filterClassesByType(String classType) {
         List<YogaClass> filteredClasses = new ArrayList<>();
         for (YogaClass yogaClass : allClasses) {
@@ -235,7 +235,7 @@ public class ViewClassActivity extends AppCompatActivity {
 
         datePickerDialog.show();
     }
-
+    // search class by date
     private void filterClassesByDate(String date) {
         if (date.isEmpty()) {
             // Nếu không nhập ngày, hiển thị tất cả các lớp
